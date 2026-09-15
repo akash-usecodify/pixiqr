@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import QRCode from 'qrcode';
-import { Copy, Check, Eye, ExternalLink, Sparkles } from 'lucide-react';
+import { Copy, Check, ExternalLink } from 'lucide-react';
 import { QROptions } from '../types';
 import { copyQRCodeToClipboard, generateQRSvg } from '../utils/qrGenerator';
 
@@ -64,13 +64,13 @@ export const QRPreview: React.FC<QRPreviewProps> = ({ options, onToast }) => {
   const displayUrl = options.value.trim() || 'https://pixiqr.app';
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200/80 p-5 sm:p-6 shadow-xs flex flex-col items-center">
+    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 p-5 sm:p-6 shadow-xs flex flex-col items-center transition-colors">
       {/* Live Badge */}
       <div className="w-full flex items-center justify-between mb-4">
-        <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+        <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
           Live Preview
         </span>
-        <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-700 text-[11px] font-semibold">
+        <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-100 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 text-[11px] font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
           Scannable
         </div>
@@ -78,7 +78,7 @@ export const QRPreview: React.FC<QRPreviewProps> = ({ options, onToast }) => {
 
       {/* QR Code Container */}
       <div
-        className="relative p-5 rounded-2xl border border-slate-200/80 shadow-inner flex items-center justify-center transition-colors overflow-hidden"
+        className="relative p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-inner flex items-center justify-center transition-colors overflow-hidden"
         style={{ backgroundColor: options.bgColor }}
       >
         <canvas
@@ -87,19 +87,19 @@ export const QRPreview: React.FC<QRPreviewProps> = ({ options, onToast }) => {
         />
 
         {renderError && (
-          <div className="absolute inset-0 bg-white/95 backdrop-blur-xs flex items-center justify-center p-4 text-center">
-            <p className="text-xs text-rose-600 font-medium">{renderError}</p>
+          <div className="absolute inset-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xs flex items-center justify-center p-4 text-center">
+            <p className="text-xs text-rose-600 dark:text-rose-400 font-medium">{renderError}</p>
           </div>
         )}
       </div>
 
       {/* Encoded Content Display */}
-      <div className="mt-4 w-full bg-slate-50 rounded-xl p-3 border border-slate-200/60 flex items-center justify-between gap-2">
+      <div className="mt-4 w-full bg-slate-50 dark:bg-slate-800/60 rounded-xl p-3 border border-slate-200/60 dark:border-slate-700/60 flex items-center justify-between gap-2">
         <div className="min-w-0 flex-1">
-          <span className="block text-[10px] font-medium text-slate-400 uppercase tracking-wider">
+          <span className="block text-[10px] font-medium text-slate-400 dark:text-slate-500 uppercase tracking-wider">
             Encoded Destination
           </span>
-          <span className="block text-xs font-mono text-slate-700 truncate" title={displayUrl}>
+          <span className="block text-xs font-mono text-slate-700 dark:text-slate-300 truncate" title={displayUrl}>
             {displayUrl}
           </span>
         </div>
@@ -108,7 +108,7 @@ export const QRPreview: React.FC<QRPreviewProps> = ({ options, onToast }) => {
             href={displayUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-1.5 text-slate-400 hover:text-indigo-600 rounded-lg hover:bg-slate-200/60 transition-colors shrink-0"
+            className="p-1.5 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-200/60 dark:hover:bg-slate-700 transition-colors shrink-0"
             title="Open link in new tab"
           >
             <ExternalLink className="w-3.5 h-3.5" />
@@ -121,17 +121,17 @@ export const QRPreview: React.FC<QRPreviewProps> = ({ options, onToast }) => {
         <button
           type="button"
           onClick={handleCopyImage}
-          className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-medium transition-colors shadow-2xs"
+          className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-200 text-xs font-medium transition-colors shadow-2xs"
           title="Copy PNG image to clipboard"
         >
           {copiedImage ? (
             <>
-              <Check className="w-3.5 h-3.5 text-emerald-600" />
-              <span className="text-emerald-700 font-semibold">Copied PNG</span>
+              <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+              <span className="text-emerald-700 dark:text-emerald-300 font-semibold">Copied PNG</span>
             </>
           ) : (
             <>
-              <Copy className="w-3.5 h-3.5 text-slate-500" />
+              <Copy className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
               <span>Copy Image</span>
             </>
           )}
@@ -140,17 +140,17 @@ export const QRPreview: React.FC<QRPreviewProps> = ({ options, onToast }) => {
         <button
           type="button"
           onClick={handleCopySvg}
-          className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-medium transition-colors shadow-2xs"
+          className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-200 text-xs font-medium transition-colors shadow-2xs"
           title="Copy SVG XML markup to clipboard"
         >
           {copiedSvg ? (
             <>
-              <Check className="w-3.5 h-3.5 text-emerald-600" />
-              <span className="text-emerald-700 font-semibold">Copied SVG</span>
+              <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+              <span className="text-emerald-700 dark:text-emerald-300 font-semibold">Copied SVG</span>
             </>
           ) : (
             <>
-              <Copy className="w-3.5 h-3.5 text-slate-500" />
+              <Copy className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
               <span>Copy SVG</span>
             </>
           )}

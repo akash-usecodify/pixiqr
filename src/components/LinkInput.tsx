@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link2, X, Clipboard, Check, Globe, Wifi, Mail, Phone, ExternalLink } from 'lucide-react';
+import { Link2, X, Clipboard, Check, Globe, Wifi, Mail, Phone } from 'lucide-react';
 
 interface LinkInputProps {
   value: string;
@@ -7,7 +7,7 @@ interface LinkInputProps {
   onToast: (msg: string) => void;
 }
 
-type InputType = 'link' | 'text' | 'wifi' | 'email' | 'phone';
+type InputType = 'link' | 'wifi' | 'email' | 'phone';
 
 export const LinkInput: React.FC<LinkInputProps> = ({ value, onChange, onToast }) => {
   const [activeType, setActiveType] = useState<InputType>('link');
@@ -66,27 +66,27 @@ export const LinkInput: React.FC<LinkInputProps> = ({ value, onChange, onToast }
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200/80 p-5 sm:p-6 shadow-xs">
+    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 p-5 sm:p-6 shadow-xs transition-colors">
       {/* Category selector */}
       <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
-        <label className="text-sm font-semibold text-slate-800 flex items-center gap-2">
+        <label className="text-sm font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-2">
           <span>Enter Destination Content</span>
-          <span className="text-xs font-normal text-slate-400">
+          <span className="text-xs font-normal text-slate-400 dark:text-slate-500">
             ({value.length} {value.length === 1 ? 'char' : 'chars'})
           </span>
         </label>
 
-        <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl text-xs font-medium text-slate-600">
+        <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-medium text-slate-600 dark:text-slate-400">
           <button
             type="button"
             onClick={() => setActiveType('link')}
             className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg transition-all ${
               activeType === 'link'
-                ? 'bg-white text-slate-900 shadow-xs font-semibold'
-                : 'hover:text-slate-900'
+                ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs font-semibold'
+                : 'hover:text-slate-900 dark:hover:text-white'
             }`}
           >
-            <Globe className="w-3.5 h-3.5 text-indigo-600" />
+            <Globe className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
             Link / URL
           </button>
           <button
@@ -94,11 +94,11 @@ export const LinkInput: React.FC<LinkInputProps> = ({ value, onChange, onToast }
             onClick={() => setActiveType('wifi')}
             className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg transition-all ${
               activeType === 'wifi'
-                ? 'bg-white text-slate-900 shadow-xs font-semibold'
-                : 'hover:text-slate-900'
+                ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs font-semibold'
+                : 'hover:text-slate-900 dark:hover:text-white'
             }`}
           >
-            <Wifi className="w-3.5 h-3.5 text-indigo-600" />
+            <Wifi className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
             Wi-Fi
           </button>
           <button
@@ -106,11 +106,11 @@ export const LinkInput: React.FC<LinkInputProps> = ({ value, onChange, onToast }
             onClick={() => setActiveType('email')}
             className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg transition-all ${
               activeType === 'email'
-                ? 'bg-white text-slate-900 shadow-xs font-semibold'
-                : 'hover:text-slate-900'
+                ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs font-semibold'
+                : 'hover:text-slate-900 dark:hover:text-white'
             }`}
           >
-            <Mail className="w-3.5 h-3.5 text-indigo-600" />
+            <Mail className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
             Email
           </button>
           <button
@@ -118,11 +118,11 @@ export const LinkInput: React.FC<LinkInputProps> = ({ value, onChange, onToast }
             onClick={() => setActiveType('phone')}
             className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg transition-all ${
               activeType === 'phone'
-                ? 'bg-white text-slate-900 shadow-xs font-semibold'
-                : 'hover:text-slate-900'
+                ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs font-semibold'
+                : 'hover:text-slate-900 dark:hover:text-white'
             }`}
           >
-            <Phone className="w-3.5 h-3.5 text-indigo-600" />
+            <Phone className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
             Phone
           </button>
         </div>
@@ -132,8 +132,8 @@ export const LinkInput: React.FC<LinkInputProps> = ({ value, onChange, onToast }
       {activeType === 'link' && (
         <div className="space-y-3">
           <div className="relative flex items-center">
-            <div className="absolute left-3.5 pointer-events-none text-slate-400">
-              <Link2 className="w-5 h-5 text-indigo-500" />
+            <div className="absolute left-3.5 pointer-events-none text-slate-400 dark:text-slate-500">
+              <Link2 className="w-5 h-5 text-indigo-500 dark:text-indigo-400" />
             </div>
             <input
               id="qr-link-input"
@@ -141,7 +141,7 @@ export const LinkInput: React.FC<LinkInputProps> = ({ value, onChange, onToast }
               value={value}
               onChange={(e) => onChange(e.target.value)}
               placeholder="https://yourwebsite.com or any text..."
-              className="w-full pl-11 pr-24 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-sm sm:text-base focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all placeholder:text-slate-400"
+              className="w-full pl-11 pr-24 py-3.5 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white text-sm sm:text-base focus:bg-white dark:focus:bg-slate-800 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500"
               autoFocus
             />
 
@@ -152,7 +152,7 @@ export const LinkInput: React.FC<LinkInputProps> = ({ value, onChange, onToast }
                   id="qr-clear-btn"
                   onClick={handleClear}
                   title="Clear input"
-                  className="p-1.5 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-200/60 transition-colors"
+                  className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg hover:bg-slate-200/60 dark:hover:bg-slate-700 transition-colors"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -162,9 +162,13 @@ export const LinkInput: React.FC<LinkInputProps> = ({ value, onChange, onToast }
                 id="qr-paste-btn"
                 onClick={handlePaste}
                 title="Paste from clipboard"
-                className="flex items-center gap-1 text-xs font-medium text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 px-2.5 py-1.5 rounded-lg shadow-xs transition-colors"
+                className="flex items-center gap-1 text-xs font-medium text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-600 px-2.5 py-1.5 rounded-lg shadow-xs transition-colors"
               >
-                {pasted ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Clipboard className="w-3.5 h-3.5 text-slate-500" />}
+                {pasted ? (
+                  <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                ) : (
+                  <Clipboard className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
+                )}
                 <span className="hidden sm:inline">{pasted ? 'Pasted' : 'Paste'}</span>
               </button>
             </div>
@@ -172,9 +176,9 @@ export const LinkInput: React.FC<LinkInputProps> = ({ value, onChange, onToast }
 
           {/* Quick sample chips */}
           <div className="flex items-center gap-1.5 flex-wrap pt-1">
-            <span className="text-xs text-slate-400 mr-1">Quick links:</span>
+            <span className="text-xs text-slate-400 dark:text-slate-500 mr-1">Quick links:</span>
             {[
-              { label: 'LinkedIn Profile', url: 'https://www.linkedin.com/in/akashsuresh' },
+              { label: 'LinkedIn Profile', url: 'https://www.linkedin.com/in/akashsuresh24/' },
               { label: 'Google Search', url: 'https://www.google.com' },
               { label: 'GitHub', url: 'https://github.com' },
               { label: 'YouTube Video', url: 'https://youtube.com/watch?v=dQw4w9WgXcQ' },
@@ -186,7 +190,7 @@ export const LinkInput: React.FC<LinkInputProps> = ({ value, onChange, onToast }
                   onChange(sample.url);
                   onToast(`Loaded ${sample.label}`);
                 }}
-                className="text-xs font-medium px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-indigo-50 text-slate-600 hover:text-indigo-600 border border-transparent hover:border-indigo-100 transition-colors"
+                className="text-xs font-medium px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 border border-transparent hover:border-indigo-100 dark:hover:border-indigo-900 transition-colors"
               >
                 {sample.label}
               </button>
@@ -197,10 +201,12 @@ export const LinkInput: React.FC<LinkInputProps> = ({ value, onChange, onToast }
 
       {/* Wi-Fi form */}
       {activeType === 'wifi' && (
-        <div className="space-y-3 bg-slate-50/70 p-4 rounded-xl border border-slate-200/80">
+        <div className="space-y-3 bg-slate-50/70 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200/80 dark:border-slate-700/80">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-slate-700 mb-1">Network Name (SSID)</label>
+              <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+                Network Name (SSID)
+              </label>
               <input
                 type="text"
                 value={wifiSsid}
@@ -209,11 +215,13 @@ export const LinkInput: React.FC<LinkInputProps> = ({ value, onChange, onToast }
                   applyWifi(e.target.value, wifiPass, wifiAuth);
                 }}
                 placeholder="Office or Home WiFi"
-                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                className="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-slate-700 mb-1">Password</label>
+              <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+                Password
+              </label>
               <input
                 type="text"
                 value={wifiPass}
@@ -222,23 +230,25 @@ export const LinkInput: React.FC<LinkInputProps> = ({ value, onChange, onToast }
                   applyWifi(wifiSsid, e.target.value, wifiAuth);
                 }}
                 placeholder="WiFi Password"
-                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                className="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
               />
             </div>
           </div>
-          <div className="flex items-center justify-between text-xs text-slate-500 pt-1">
+          <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 pt-1">
             <span>Security: WPA/WPA2 (Standard)</span>
-            <span className="text-emerald-600 font-medium">Guests scan to join instantly</span>
+            <span className="text-emerald-600 dark:text-emerald-400 font-medium">Guests scan to join instantly</span>
           </div>
         </div>
       )}
 
       {/* Email form */}
       {activeType === 'email' && (
-        <div className="space-y-3 bg-slate-50/70 p-4 rounded-xl border border-slate-200/80">
+        <div className="space-y-3 bg-slate-50/70 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200/80 dark:border-slate-700/80">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-slate-700 mb-1">Recipient Email</label>
+              <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+                Recipient Email
+              </label>
               <input
                 type="email"
                 value={emailTo}
@@ -247,11 +257,13 @@ export const LinkInput: React.FC<LinkInputProps> = ({ value, onChange, onToast }
                   applyEmail(e.target.value, emailSubject);
                 }}
                 placeholder="contact@example.com"
-                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                className="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-slate-700 mb-1">Subject (Optional)</label>
+              <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+                Subject (Optional)
+              </label>
               <input
                 type="text"
                 value={emailSubject}
@@ -260,7 +272,7 @@ export const LinkInput: React.FC<LinkInputProps> = ({ value, onChange, onToast }
                   applyEmail(emailTo, e.target.value);
                 }}
                 placeholder="Inquiry / Feedback"
-                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                className="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
               />
             </div>
           </div>
@@ -269,9 +281,11 @@ export const LinkInput: React.FC<LinkInputProps> = ({ value, onChange, onToast }
 
       {/* Phone form */}
       {activeType === 'phone' && (
-        <div className="space-y-3 bg-slate-50/70 p-4 rounded-xl border border-slate-200/80">
+        <div className="space-y-3 bg-slate-50/70 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200/80 dark:border-slate-700/80">
           <div>
-            <label className="block text-xs font-medium text-slate-700 mb-1">Phone Number (with country code)</label>
+            <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+              Phone Number (with country code)
+            </label>
             <input
               type="tel"
               value={phoneNumber}
@@ -280,10 +294,12 @@ export const LinkInput: React.FC<LinkInputProps> = ({ value, onChange, onToast }
                 applyPhone(e.target.value);
               }}
               placeholder="+1 (555) 019-2834"
-              className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+              className="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
             />
           </div>
-          <p className="text-xs text-slate-500">Scanning this QR code will prompt the device to dial the number directly.</p>
+          <p className="text-xs text-slate-500 dark:text-slate-400">
+            Scanning this QR code prompts the smartphone to dial directly.
+          </p>
         </div>
       )}
     </div>
